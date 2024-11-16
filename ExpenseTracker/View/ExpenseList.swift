@@ -15,7 +15,7 @@ struct ExpenseList: View {
     
     var body: some View {
         NavigationStack{
-            //MARK: List of expenses
+            // MARK: - List of Expenses
             List {
                 ForEach(expenseViewModel.expenses) { expense in
                     VStack(alignment: .leading) {
@@ -32,7 +32,8 @@ struct ExpenseList: View {
                 .onMove(perform: expenseViewModel.moveExpense(from:to:))
             }
             .navigationBarTitle("Expenses")
-            //MARK: Toolbar items
+            
+            // MARK: - Toolbar items
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
@@ -52,7 +53,8 @@ struct ExpenseList: View {
                     }
                 }
             }
-            //MARK: Sheets presentation
+            
+            // MARK: - Sheets presentation
             .sheet(isPresented: $showAddExpense) {
                 AddExpense()
                     .environmentObject(expenseViewModel)

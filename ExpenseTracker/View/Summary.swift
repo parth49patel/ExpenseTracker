@@ -14,6 +14,7 @@ struct Summary: View {
     
     var body: some View {
         NavigationStack {
+            // MARK: - Total Spending Section
             VStack {
                 Text("Total Spending")
                     .font(.title)
@@ -25,6 +26,7 @@ struct Summary: View {
             .background(Color.secondary.opacity(0.4))
             .clipShape(.rect(cornerRadius: 10))
             
+            // MARK: - Spending by Category Section
             VStack {
                 Text("Spending by Category")
                     .font(.title)

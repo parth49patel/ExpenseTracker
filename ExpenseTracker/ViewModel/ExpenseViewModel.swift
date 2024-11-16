@@ -9,9 +9,13 @@ import Foundation
 
 class ExpenseViewModel: ObservableObject {
     
+    /// Published property to notify SwiftUI views when the list of expenses changes.
     @Published var expenses: [Expense] = []
+    
+    /// Key for saving and loading expenses in UserDefaults.
     private let expenseKey = "expenses"
     
+    /// Initializer to load expenses from UserDefaults when the ViewModel is instantiated.
     init() {
         loadExpenses()
     }
@@ -43,17 +47,22 @@ class ExpenseViewModel: ObservableObject {
     }
     
     var totalSpending: Double {
+        // Use `reduce` to sum up the amounts of all expenses.
         expenses.reduce(0) { $0 + $1.amount }
     }
     
     func spendingByCategory(_ category: Category) -> Double {
+        // Filter the expenses for the specified category and sum their amounts.
         expenses.filter { $0.category == category }.reduce(0) { $0 + $1.amount }
     }
     
+    /// Deletes an expense from the list and updates persistent storage.
     func deleteExpense(indexSet: IndexSet) {
         expenses.remove(atOffsets: indexSet)
         saveExpenses()
     }
+    
+    /// Moves an expense within the list and updates persistent storage.
     func moveExpense(from: IndexSet, to: Int) {
         expenses.move(fromOffsets: from, toOffset: to)
         saveExpenses()

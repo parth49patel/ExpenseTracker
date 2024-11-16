@@ -7,10 +7,12 @@
 
 import Foundation
 
+// MARK: - Enum for Expense Categories
 enum Category: String, Codable, CaseIterable {
     case food, transport, entertainment, miscellaneous
 }
 
+// MARK: - Expense Struct
 struct Expense: Codable, Identifiable {
     let id: UUID
     let title: String
