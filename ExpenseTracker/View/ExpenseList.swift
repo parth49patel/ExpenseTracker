@@ -11,8 +11,6 @@ struct ExpenseList: View {
     
     @StateObject private var expenseViewModel = ExpenseViewModel()
     @State private var showAddExpense: Bool = false
-    @State private var showSummary: Bool = false
-    
     var body: some View {
         NavigationStack{
             // MARK: - List of Expenses
@@ -35,33 +33,20 @@ struct ExpenseList: View {
             
             // MARK: - Toolbar items
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .topBarLeading) {
                     EditButton()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showAddExpense = true
+                        showAddExpense.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        showSummary = true
-                    } label: {
-                        Text("Summary")
-                    }
-                }
             }
-            
-            // MARK: - Sheets presentation
             .sheet(isPresented: $showAddExpense) {
                 AddExpense()
                     .environmentObject(expenseViewModel)
-            }
-            .sheet(isPresented: $showSummary) {
-                Summary()
-                    .presentationDetents([.medium])
             }
         }
     }
